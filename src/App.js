@@ -17,9 +17,10 @@ const corsOptions = {
   origin: process.env.CLIENT_URL, // http://localhost:3001
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
 };
-app.use(cors());
-app.options("*", cors(corsOptions)); // 👈 handle preflight
+app.use(cors(corsOptions));
+// app.options("*", cors(corsOptions)); 
 
 /* ---------- DB ---------- */
 mongoose.set("strictQuery", false);

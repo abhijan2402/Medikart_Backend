@@ -13,8 +13,9 @@ const sendEmail = require("../Utilities/SendEmail");
 
 const { createSecretToken } = require("../Utilities/SecretToken");
 const bcrypt = require("bcryptjs");
+
 module.exports.PatientRegister = async (req, res, next) => {
-  console.log(res.body)
+  console.log(res.body);
   try {
     const existingUserinPatient = await patientModel.findOne({
       Username: req.body.username,
@@ -50,7 +51,7 @@ module.exports.PatientRegister = async (req, res, next) => {
     });
     res
       .status(201)
-      .json({ message: "User signed in successfully", success: true, user });
+      .json({ message: "User signed in successfully", success: true, user, token });
     next();
   } catch (error) {
     console.error(error);
@@ -162,6 +163,7 @@ module.exports.addAdmin = async (req, res, next) => {
 };
 module.exports.Login = async (req, res, next) => {
   try {
+    console.log(req.body)
     const { username, password } = req.body;
     if (!username || !password) {
       return res.json({ message: "All fields are required" });
@@ -197,15 +199,15 @@ module.exports.Login = async (req, res, next) => {
     res.cookie("token", token, {
       withCredentials: true,
       httpOnly: false,
+      // secure: false,
+      // sameSite: "None",
     });
 
-    res
-      .status(201)
-      .json({
-        message: "User logged in successfully",
-        success: true,
-        role: role,
-      });
+    res.status(201).json({
+      message: "User logged in successfully",
+      success: true,
+      role: role,
+    });
     //  next()
   } catch (error) {
     console.error(error);
