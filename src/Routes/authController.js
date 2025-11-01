@@ -47,11 +47,21 @@ module.exports.PatientRegister = async (req, res, next) => {
     const token = createSecretToken(user._id);
     res.cookie("token", token, {
       withCredentials: true,
-      httpOnly: false,
+      httpOnly: true,
+      secure: true, // must be true for HTTPS
+      sameSite: "None", // required for cross-domain cookies
+      domain: ".prabhatanvik.shop", // notice the dot at the start
+      path: "/",
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
     res
       .status(201)
-      .json({ message: "User signed in successfully", success: true, user, token });
+      .json({
+        message: "User signed in successfully",
+        success: true,
+        user,
+        token,
+      });
     next();
   } catch (error) {
     console.error(error);
@@ -115,7 +125,12 @@ module.exports.pharmaRegister = async (req, res, next) => {
     const token = createSecretToken(user._id);
     res.cookie("token", token, {
       withCredentials: true,
-      httpOnly: false,
+      httpOnly: true,
+      secure: true, // must be true for HTTPS
+      sameSite: "None", // required for cross-domain cookies
+      domain: ".prabhatanvik.shop", // notice the dot at the start
+      path: "/",
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
     res
       .status(201)
@@ -151,7 +166,12 @@ module.exports.addAdmin = async (req, res, next) => {
     const token = createSecretToken(user._id);
     res.cookie("token", token, {
       withCredentials: true,
-      httpOnly: false,
+      httpOnly: true,
+      secure: true, // must be true for HTTPS
+      sameSite: "None", // required for cross-domain cookies
+      domain: ".prabhatanvik.shop", // notice the dot at the start
+      path: "/",
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
     res
       .status(201)
@@ -163,7 +183,7 @@ module.exports.addAdmin = async (req, res, next) => {
 };
 module.exports.Login = async (req, res, next) => {
   try {
-    console.log(req.body)
+    console.log(req.body);
     const { username, password } = req.body;
     if (!username || !password) {
       return res.json({ message: "All fields are required" });
@@ -198,9 +218,12 @@ module.exports.Login = async (req, res, next) => {
     const token = createSecretToken(loggedIn._id, role);
     res.cookie("token", token, {
       withCredentials: true,
-      httpOnly: false,
-      // secure: false,
-      // sameSite: "None",
+      httpOnly: true,
+      secure: true, // must be true for HTTPS
+      sameSite: "None", // required for cross-domain cookies
+      domain: ".prabhatanvik.shop", // notice the dot at the start
+      path: "/",
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
 
     res.status(201).json({
@@ -449,7 +472,12 @@ module.exports.ResetPass = async (req, res) => {
     const token = createSecretToken(loggedIn._id, role);
     res.cookie("token", token, {
       withCredentials: true,
-      httpOnly: false,
+      httpOnly: true,
+      secure: true, // must be true for HTTPS
+      sameSite: "None", // required for cross-domain cookies
+      domain: ".prabhatanvik.shop", // notice the dot at the start
+      path: "/",
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
 
     return res
