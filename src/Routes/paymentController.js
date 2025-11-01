@@ -16,7 +16,7 @@ const {
 } = process.env;
 
 const cashfree = new Cashfree(
-  CFEnvironment.SANDBOX, // Use PRODUCTION when going live
+  CFEnvironment.PRODUCTION, // Use PRODUCTION when going live
   CASHFREE_APP_ID,
   CASHFREE_SECRET_KEY
 );
