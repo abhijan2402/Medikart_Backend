@@ -240,29 +240,30 @@ module.exports.currentUser = (req, res, next) => {
   const token = req.cookies.token;
   if (!token) {
     return res.json({ status: false });
-  }
-  jwt.verify(token, process.env.TOKEN_KEY, async (err, data) => {
-    if (err) {
-      return res.json({ status: false });
-    } else {
-      var user;
-      if (data.role === "patient") {
-        user = await patientModel.findById(data.id);
-      }
-      if (data.role === "pharmacist") {
-        user = await pharmaModel.findById(data.id);
-      }
-      if (data.role === "admin") {
-        user = await adminModel.findById(data.id);
-      }
-
-      if (user) {
-        res.json({ status: true, user: user.Username });
-      } else {
+  } else {
+    jwt.verify(token, process.env.TOKEN_KEY, async (err, data) => {
+      if (err) {
         return res.json({ status: false });
+      } else {
+        var user;
+        if (data.role === "patient") {
+          user = await patientModel.findById(data.id);
+        }
+        if (data.role === "pharmacist") {
+          user = await pharmaModel.findById(data.id);
+        }
+        if (data.role === "admin") {
+          user = await adminModel.findById(data.id);
+        }
+
+        if (user) {
+          res.json({ status: true, user: user.Username });
+        } else {
+          return res.json({ status: false });
+        }
       }
-    }
-  });
+    });
+  }
 };
 module.exports.Logout = (req, res) => {
   const username = req.user.Username;
