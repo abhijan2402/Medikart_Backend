@@ -48,18 +48,16 @@ module.exports.PatientRegister = async (req, res, next) => {
     res.cookie("token", token, {
       withCredentials: true,
       httpOnly: false,
-sameSite: "None",        
-  domain: ".prabhatanvik.shop", 
-  path: "/",
+      sameSite: "None",
+      domain: ".prabhatanvik.shop",
+      path: "/",
     });
-    res
-      .status(201)
-      .json({
-        message: "User signed in successfully",
-        success: true,
-        user,
-        token,
-      });
+    res.status(201).json({
+      message: "User signed in successfully",
+      success: true,
+      user,
+      token,
+    });
     next();
   } catch (error) {
     console.error(error);
@@ -125,9 +123,9 @@ module.exports.pharmaRegister = async (req, res, next) => {
       withCredentials: true,
       secure: true, // must be true for HTTPS
       httpOnly: false,
-sameSite: "None",        
-  domain: ".prabhatanvik.shop", 
-  path: "/",
+      sameSite: "None",
+      domain: ".prabhatanvik.shop",
+      path: "/",
     });
     res
       .status(201)
@@ -163,9 +161,9 @@ module.exports.addAdmin = async (req, res, next) => {
     res.cookie("token", token, {
       withCredentials: true,
       httpOnly: false,
-sameSite: "None",        
-  domain: ".prabhatanvik.shop", 
-  path: "/",
+      sameSite: "None",
+      domain: ".prabhatanvik.shop",
+      path: "/",
     });
     res
       .status(201)
@@ -215,13 +213,10 @@ module.exports.Login = async (req, res, next) => {
     const token = createSecretToken(loggedIn._id, role);
     res.cookie("token", token, {
       withCredentials: true,
-<<<<<<< Updated upstream
-      httpOnly: true,
-      secure: true, // must be true for HTTPS
-      sameSite: "None", // required for cross-domain cookies
-      domain: ".prabhatanvik.shop", // notice the dot at the start
+      httpOnly: false,
+      sameSite: "None",
+      domain: ".prabhatanvik.shop",
       path: "/",
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
 
     res.status(201).json({
@@ -229,21 +224,13 @@ module.exports.Login = async (req, res, next) => {
       success: true,
       role: role,
     });
-      httpOnly: false,
-secure: true, 
-sameSite: "none",
- domain: ".prabhatanvik.shop",
-path: "/"
+
+    console.log(res, "cookie");
+    res.status(201).json({
+      message: "User logged in successfully",
+      success: true,
+      role: role,
     });
-console.log(res,'cookie')
-    res
-      .status(201)
-      .json({
-        message: "User logged in successfully",
-        success: true,
-        role: role,
-      });
->>>>>>> Stashed changes
     //  next()
   } catch (error) {
     console.error(error);
@@ -331,9 +318,9 @@ module.exports.ChangePassword = async (req, res) => {
   res.cookie("token", token, {
     withCredentials: true,
     httpOnly: false,
-sameSite: "None",        
-  domain: ".prabhatanvik.shop", 
-  path: "/",
+    sameSite: "None",
+    domain: ".prabhatanvik.shop",
+    path: "/",
   });
   res
     .status(201)
@@ -417,9 +404,9 @@ module.exports.ResetPassword = async (req, res) => {
   res.cookie("token", token, {
     withCredentials: true,
     httpOnly: false,
-sameSite: "None",        
-  domain: ".prabhatanvik.shop", 
-  path: "/",
+    sameSite: "None",
+    domain: ".prabhatanvik.shop",
+    path: "/",
   });
   return res
     .status(201)
@@ -493,8 +480,8 @@ module.exports.ResetPass = async (req, res) => {
       withCredentials: true,
       path: "/",
       httpOnly: false,
-sameSite: "None",        
-  domain: ".prabhatanvik.shop", 
+      sameSite: "None",
+      domain: ".prabhatanvik.shop",
     });
 
     return res
