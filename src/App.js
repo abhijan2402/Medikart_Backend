@@ -14,15 +14,14 @@ app.use(cookieParser());
 app.use(express.static("uploads"));
 
 const corsOptions = {
-  origin: process.env.CLIENT_URL, // http://localhost:3001
+   origin: ["https://prabhatanvik.shop", "https://www.prabhatanvik.shop"],
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
 app.use(cors(corsOptions));
-// app.options("*", cors(corsOptions)); 
 
-/* ---------- DB ---------- */
+/* ----------DB ---------- */
 mongoose.set("strictQuery", false);
 mongoose
   .connect(process.env.MONGO_URI, {
