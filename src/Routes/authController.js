@@ -46,11 +46,12 @@ module.exports.PatientRegister = async (req, res, next) => {
     });
     const token = createSecretToken(user._id);
     res.cookie("token", token, {
-      withCredentials: true,
       httpOnly: true,
+      secure: true,
       sameSite: "None",
       domain: ".prabhatanvik.shop",
       path: "/",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     });
     res.status(201).json({
       message: "User signed in successfully",
@@ -120,12 +121,12 @@ module.exports.pharmaRegister = async (req, res, next) => {
     });
     const token = createSecretToken(user._id);
     res.cookie("token", token, {
-      withCredentials: true,
-      secure: true, // must be true for HTTPS
       httpOnly: true,
+      secure: true,
       sameSite: "None",
       domain: ".prabhatanvik.shop",
       path: "/",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     });
     res
       .status(201)
@@ -159,11 +160,12 @@ module.exports.addAdmin = async (req, res, next) => {
     });
     const token = createSecretToken(user._id);
     res.cookie("token", token, {
-      withCredentials: true,
       httpOnly: true,
+      secure: true,
       sameSite: "None",
       domain: ".prabhatanvik.shop",
       path: "/",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     });
     res
       .status(201)
@@ -212,11 +214,12 @@ module.exports.Login = async (req, res, next) => {
     }
     const token = createSecretToken(loggedIn._id, role);
     res.cookie("token", token, {
-      withCredentials: true,
       httpOnly: true,
+      secure: true,
       sameSite: "None",
       domain: ".prabhatanvik.shop",
       path: "/",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
     res.status(201).json({
