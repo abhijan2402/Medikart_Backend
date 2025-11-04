@@ -46,7 +46,7 @@ module.exports.PatientRegister = async (req, res, next) => {
     });
     const token = createSecretToken(user._id);
     res.cookie("token", token, {
-      httpOnly: true,
+      httpOnly: false,
       secure: true,
       sameSite: "None",
       domain: ".prabhatanvik.shop",
@@ -121,7 +121,7 @@ module.exports.pharmaRegister = async (req, res, next) => {
     });
     const token = createSecretToken(user._id);
     res.cookie("token", token, {
-      httpOnly: true,
+      httpOnly: false,
       secure: true,
       sameSite: "None",
       domain: ".prabhatanvik.shop",
@@ -160,7 +160,7 @@ module.exports.addAdmin = async (req, res, next) => {
     });
     const token = createSecretToken(user._id);
     res.cookie("token", token, {
-      httpOnly: true,
+      httpOnly: false,
       secure: true,
       sameSite: "None",
       domain: ".prabhatanvik.shop",
@@ -315,7 +315,7 @@ module.exports.ChangePassword = async (req, res) => {
   const token = createSecretToken(loggedIn._id, role);
   res.cookie("token", token, {
     withCredentials: true,
-    httpOnly: true,
+    httpOnly: false,
     sameSite: "None",
     domain: ".prabhatanvik.shop",
     path: "/",
@@ -401,7 +401,7 @@ module.exports.ResetPassword = async (req, res) => {
   const token = createSecretToken(loggedIn._id, role);
   res.cookie("token", token, {
     withCredentials: true,
-    httpOnly: true,
+    httpOnly: false,
     sameSite: "None",
     domain: ".prabhatanvik.shop",
     path: "/",
@@ -477,7 +477,7 @@ module.exports.ResetPass = async (req, res) => {
     res.cookie("token", token, {
       withCredentials: true,
       path: "/",
-      httpOnly: true,
+      httpOnly: false,
       sameSite: "None",
       domain: ".prabhatanvik.shop",
     });
