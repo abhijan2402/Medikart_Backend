@@ -15,12 +15,19 @@ app.use(express.static("uploads"));
 
 const corsOptions = {
 
-   origin: ["https://prabhatanvik.shop", "https://www.prabhatanvik.shop"],
+   origin: "https://prabhatanvik.shop",
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
 app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "https://prabhatanvik.shop");
+  res.header("Access-Control-Allow-Credentials", "true");
+  next();
+});
 
 /* ----------DB ---------- */
 mongoose.set("strictQuery", false);

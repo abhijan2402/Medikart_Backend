@@ -214,26 +214,20 @@ module.exports.Login = async (req, res, next) => {
     }
     const token = createSecretToken(loggedIn._id, role);
     res.cookie("token", token, {
-      httpOnly: true,
+      httpOnly: false,
       secure: true,
       sameSite: "None",
       domain: ".prabhatanvik.shop",
       path: "/",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
-
+console.log(res,'cookie')
     res.status(201).json({
       message: "User logged in successfully",
       success: true,
       role: role,
     });
 
-    console.log(res, "cookie");
-    res.status(201).json({
-      message: "User logged in successfully",
-      success: true,
-      role: role,
-    });
     //  next()
   } catch (error) {
     console.error(error);
